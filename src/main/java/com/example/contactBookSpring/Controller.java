@@ -66,6 +66,8 @@ public class Controller {
             Contact findContact = contactRepository.findByLink(contact.getLink());
             if (findContact != null) {
                 person = service.personConverterToDTO(personRepository.findById(findContact.getPersonId()));
+            }   else    {
+                person = service.personConverterToDTO(personRepository.findByName(contact.getLink()));
             }
         }
         model.addAttribute("person_list", person);
