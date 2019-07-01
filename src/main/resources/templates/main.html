@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<br>
+<h1>Create contact</h1>
+<form action="#" th:action="@{/new_person}" method="post">
+    <p>Name: <input type="text" th:field="${person.name}"/></p>
+    <p>Link: <input type="text" th:field="${contact.link}"/></p>
+    <select th:field="${type.typeName}">
+        <option th:each="i : ${typeList}" th:value="${i.typeName}" th:text="${i.typeName}"></option>
+    </select>
+    <p><input type="submit" value="Create contact"/></p>
+</form>
+<br>
+<h1>Contact table</h1>
+<table width=100% height=100% border=1>
+    <!--    <tr>-->
+    <!--    <tr th:each="t : ${typeList}">-->
+    <!--        <td th:text="${t.typeName}"></td>-->
+    <!--    </tr>-->
+    <th:block th:each="pers : ${persons}">
+        <tr>
+            <td th:text="${pers.getName()}">...</td>
+            <td th:each="t : ${typeList}">
+                <div th:each="contact : ${pers.getContact()}">
+                    <div th:if="${contact.type.id == t.id}"
+                         th:text="${contact.type.typeName} + ' : ' + ${contact.link}"></div>
+                </div>
+            </td>
+            <td>
+                <a th:href="@{'/add_contact/' + ${pers.id}}">
+                    <span>Add to the contact list</span>
+                </a>
+            </td>
+        </tr>
+    </th:block>
+</table>
+<br>
+<h1>Find contact</h1>
+<form action="#" th:action="@{/find_contact}" method="post">
+    <p><input type="submit" value="Search"/></p>
+</form>
+</body>
+</html>

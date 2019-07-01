@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form action="#" th:action="@{/add_link}" method="post">
+    <p th:text="${person.name}">...</p>
+    <p>Phone number: <input type="text" th:field="${contact.link}"/></p>
+    <select th:field="${type.typeName}">
+        <option th:each="i : ${typeList}" th:value="${i.typeName}" th:text="${i.typeName}"></option>
+    </select>
+    <p><input type="submit" value="Create contact"/></p>
+</form>
+</body>
+</html>
